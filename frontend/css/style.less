@@ -59,7 +59,9 @@ img{display: block;}
 .header{ padding: 0px 0; z-index: -10; position: fixed; top: 0; bottom: 0; left: 0; right: 0;
 
   .video{position: absolute; height: 100vh; top: 0; left: 0; right: 0; bottom: 0; display: flex; align-items: center; align-content: center; justify-content: center;
-    &_iframe{padding-bottom: 45%; position: relative; width: 80vw;}
+    &_iframe{padding-bottom: 45%; position: relative; width: 80vw;
+      @media @mobile{height: 100vh; padding-bottom: 0; width: 100vw;}
+    }
     video { box-shadow: 0px 10px 100px @black;
     position: absolute;
     width: 100%;
@@ -82,13 +84,8 @@ img{display: block;}
 
   &__subtitle{ .animation(); padding-top: 30px;
     color: @grey; font-family: @font; letter-spacing: 2px; text-transform: uppercase; position: relative; font-size: 14px;
-    // &:after{
-    //   content: ' '; left: 25%; width: 0; background-color: @grey; height: 1px; position: absolute; top: 25px; transition: width @animation;
-    // }
-    &.is-animated{
-      &:after{width: 50%;}
-    }
 
+    @media @mobile{padding-top: 50vh;}
 
   }
 
