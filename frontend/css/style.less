@@ -16,8 +16,10 @@
 // | · COLORS
 // + ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
 
+@background:  #111111;
+
 @white:	      #FFFFFF;
-@black:		    #030303;
+@black:		    #000000;
 @grey:		    #999999;
 @grey-light:  #EEEEEE;
 @purple:      #9D77FC;
@@ -27,18 +29,62 @@
 // + ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
 // | · FONTS
 // + ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
-
-@font:   'Chivo', -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial, sans-serif;
+@import url('https://fonts.googleapis.com/css?family=Work+Sans');
+@font:   'Work Sans', -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial, sans-serif;
 
 // + ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
 // | GLOBAL
 // + ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
-*, *:before, *:after{box-sizing: border-box; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);}
+*, *:before, *:after{box-sizing: border-box; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
 
-body {background: @white; font-size: 16px; line-height: 23px; font-family: @font; color: @black; text-rendering: optimizeSpeed; font-weight: 400; margin: 0; border: 0; letter-spacing: 0.04em; word-spacing: 0.001em; opacity: 0; -webkit-font-smoothing: antialiased; -moz-osx-fontsmoothing: grayscale; transition: opacity @ease;
-  &.is-visible{opacity: 1;}
+body {background: @background; font-size: 16px; line-height: 23px; font-family: @font; color: @black; text-rendering: optimizeSpeed; font-weight: 400; margin: 0; border: 0; letter-spacing: 0.04em; word-spacing: 0.001em; -webkit-font-smoothing: antialiased; -moz-osx-fontsmoothing: grayscale; transition: opacity @ease; font-family: @font;}
+
+.module{padding: 0 calc(~"1.5rem * 3"); position: relative; margin: auto;
+  @media @mobile{padding-left: 25px; padding-right: 25px;}
 }
 
-.module{padding: 0 calc(~"1.5rem * 5"); position: relative; margin: auto;
-  @media @mobile{padding-left: 25px; padding-right: 25px;}
+// + ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
+// | HEADER
+// + ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
+
+.header{ padding: 0px 0; z-index: -10;
+
+  .module{display: flex; align-items: center; align-content: center; min-height: 100vh; justify-content: center; flex-direction: column;}
+  &__logo{ top: 0;
+    img{width: 100px; height: auto;}
+  }
+
+  &__title{width: 100%; .animation(); text-align: center;
+    img{ height: auto; width: 100%; max-width: 400px;}
+  }
+
+  &__subtitle{ .animation(); padding-top: 15px;
+    color: @grey; font-family: @font; letter-spacing: 2px; text-transform: uppercase;
+  }
+
+}
+
+.animation(){
+  transition: transform @animation, filter @animation 0.1s, opacity @animation; opacity: 0; transform: translateY(10px); filter: grayscale();
+  &.is-animated{
+    transform: translateY(0px); filter: none; opacity: 1;
+  }
+}
+
+.grain{
+    display: block; position: fixed; top: -50%; left: -60%; right: -60%; bottom: -60%; z-index: 1000; pointer-events: none; background: transparent url(../img/noise.png) repeat 0 0; opacity: .5; visibility: visible; animation: grain .2s infinite;
+}
+
+@keyframes grain {
+  0%{transform:translate(0,0)}
+  10%{transform:translate(-5%,-5%)}
+  20%{transform:translate(-10%,5%)}
+  30%{transform:translate(5%,-10%)}
+  40%{transform:translate(-5%,15%)}
+  50%{transform:translate(-10%,5%)}
+  60%{transform:translate(15%,0)}
+  70%{transform:translate(0,10%)}
+  80%{transform:translate(-15%,0)}
+  90%{transform:translate(10%,5%)}
+  100%{transform:translate(5%,0)}
 }
