@@ -1,0 +1,44 @@
+// + ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
+// | VARIABLES
+// + ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
+// | · IMPORT
+// + ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
+
+@import (less) "reset.css";
+
+@mobile: ~ "only screen and (max-width: 586px)";
+
+@seconds: 0.25s;
+@ease: ~ "cubic-bezier(.23,1,.32,1)";
+@animation: @seconds @ease;
+
+// + ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
+// | · COLORS
+// + ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
+
+@white:	      #FFFFFF;
+@black:		    #030303;
+@grey:		    #999999;
+@grey-light:  #EEEEEE;
+@purple:      #9D77FC;
+
+@primary:    @purple;
+
+// + ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
+// | · FONTS
+// + ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
+
+@font:   'Chivo', -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial, sans-serif;
+
+// + ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
+// | GLOBAL
+// + ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
+*, *:before, *:after{box-sizing: border-box; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);}
+
+body {background: @white; font-size: 16px; line-height: 23px; font-family: @font; color: @black; text-rendering: optimizeSpeed; font-weight: 400; margin: 0; border: 0; letter-spacing: 0.04em; word-spacing: 0.001em; opacity: 0; -webkit-font-smoothing: antialiased; -moz-osx-fontsmoothing: grayscale; transition: opacity @ease;
+  &.is-visible{opacity: 1;}
+}
+
+.module{padding: 0 calc(~"1.5rem * 5"); position: relative; margin: auto;
+  @media @mobile{padding-left: 25px; padding-right: 25px;}
+}
