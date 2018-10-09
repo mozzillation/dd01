@@ -43,6 +43,12 @@ body {background: @background; font-size: 16px; line-height: 23px; font-family: 
   @media @mobile{padding-left: 25px; padding-right: 25px;}
 }
 
+#page{overflow: hidden; opacity: 0; transition: opacity @ease;
+  &.is-loaded{
+    opacity: 1;
+  }
+}
+
 // + ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
 // | HEADER
 // + ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
@@ -55,11 +61,19 @@ body {background: @background; font-size: 16px; line-height: 23px; font-family: 
   }
 
   &__title{width: 100%; .animation(); text-align: center;
-    img{ height: auto; width: 100%; max-width: 400px;}
+    img{ height: auto; width: 100%; max-width: 900px;}
   }
 
-  &__subtitle{ .animation(); padding-top: 15px;
-    color: @grey; font-family: @font; letter-spacing: 2px; text-transform: uppercase;
+  &__subtitle{ .animation(); padding-top: 30px;
+    color: @grey; font-family: @font; letter-spacing: 2px; text-transform: uppercase; position: relative;
+    &:after{
+      content: ' '; left: 25%; width: 0; background-color: @grey; height: 1px; position: absolute; top: 15px; transition: width @animation;
+    }
+    &.is-animated{
+      &:after{width: 50%;}
+    }
+
+
   }
 
 }
@@ -72,7 +86,8 @@ body {background: @background; font-size: 16px; line-height: 23px; font-family: 
 }
 
 .grain{
-    display: block; position: fixed; top: -50%; left: -60%; right: -60%; bottom: -60%; z-index: 1000; pointer-events: none; background: transparent url(../img/noise.png) repeat 0 0; opacity: .5; visibility: visible; animation: grain .2s infinite;
+    display: block; position: fixed; top: -50%; left: -60%; right: -60%; bottom: -60%; z-index: 1000; pointer-events: none; background: transparent url(../img/noise.png) repeat 0 0; visibility: visible; animation: grain .5s infinite; opacity: 0; transition: opacity 1s @ease;
+    &.is-loaded{opacity: .7; }
 }
 
 @keyframes grain {

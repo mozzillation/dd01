@@ -3,6 +3,13 @@ $(window).load(function() {
 })
 
 function animate() {
+
+  var page = $('#page'),
+    grain = $('.grain');
+
+  grain.addClass('is-loaded');
+  page.addClass('is-loaded');
+
   var i = 0,
     arrayAnimation = $('[data-animate]').toArray();
 
