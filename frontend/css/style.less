@@ -5,8 +5,7 @@
 // + ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
 
 @import (less) "reset.css";
-@import "../fonts/fonts.css";
-
+@import (less) "grid.css";
 @mobile: ~ "only screen and (max-width: 586px)";
 
 @seconds: 0.25s;
@@ -30,8 +29,9 @@
 // + ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
 // | · FONTS
 // + ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
-@import url('https://fonts.googleapis.com/css?family=Poppins:300,500');
+@import url('https://fonts.googleapis.com/css?family=Poppins:500|Domine');
 @font: 'Poppins', -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial, sans-serif;
+@font2: 'Domine', serif;
 
 // + ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
 // | GLOBAL
@@ -44,13 +44,26 @@ body {background: @background; font-size: 16px; line-height: 23px; font-family: 
   @media @mobile{padding-left: 25px; padding-right: 25px;}
 }
 
+.row {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  width: 100vw;
+  padding:  0px calc((1.5rem * 3) - 2%);
+  @media @mobile{
+    padding: 0px 15px;
+  }
+}
+
+
 #page{overflow: hidden; opacity: 0; transition: opacity @ease;
   &.is-loaded{
     opacity: 1;
   }
 }
 
-img{display: block;}
+img{display: block; width: 100%;}
 
 // + ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
 // | HEADER
@@ -83,8 +96,7 @@ img{display: block;}
   }
 
   &__subtitle{ .animation(); padding-top: 30px;
-    color: @grey; font-family: @font; letter-spacing: 2px; text-transform: uppercase; position: relative; font-size: 14px;
-
+    color: @white; font-family: @font; letter-spacing: 2px; text-transform: uppercase; position: relative; font-size: 14px;
     @media @mobile{padding-top: 50vh;}
 
   }
@@ -93,20 +105,71 @@ img{display: block;}
 
 
 #page-scroll{
-  position: absolute; top: 100vh; z-index: 1000; box-shadow: 0px 0px 100px @black; width: 100vw; background-color: @background;
+  position: absolute; top: 100vh; z-index: 1000; box-shadow: 0px 0px 100px @black; width: 100vw; background-color: @background; margin-bottom: 75vh; overflow: hidden;
+
+  @media @mobile{position: relative; margin-bottom: auto; top: auto; margin-top: 100vh;}
 }
 
 // + ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
 // | DEFINITION
 // + ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
+.block{z-index: 100;}
 .definition{min-height: 100vh; color: @grey; font-size: 2rem; line-height: 3rem; font-weight: 500; padding: 50px 0;
+  .row{display: flex; align-items: flex-end; flex-direction: row; }
+
   @media @mobile{ font-size: 18px; line-height: 32px; min-height: auto;}
-  &_title{font-size: 14px; letter-spacing: 2px; text-transform: uppercase; color: @primary; font-weight: 300; .animation();}
-  span{display: block; .animation();  transition: opacity @animation, transform @animation;
-    @media @mobile{display: inline;}
+  &_title{font-size: 14px; color: @primary; font-weight: 300; .animation(); letter-spacing: 2px; text-transform: uppercase;}
+
+  span[data-scroll]{ .animation();  transition: opacity @animation, transform @animation;
+    @media @mobile{display: inline; }
   }
+
+  &_text{
+    @media @mobile{
+      padding-bottom: 30px;
+    }
+  }
+
+  &_author{ .animation(); padding-bottom: 6px; color: @primary;
+    font-size: 12px; font-family: @font2; line-height: 22px;
+  }
+
+  .note{font-size: 10px; letter-spacing: 2px; vertical-align: super; color: @primary; }
+
+  a{border-bottom: 1px solid fade(@grey-light, 20); transition: border @animation;
+    &:hover{border-color: @primary;}
+  }
+
 }
 
+// + ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
+// | FOOTER
+// + ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
+.footer{ align-items: flex-end; display: flex;
+  opacity: 0; z-index: 0; position: fixed; top: 25vh; left: 0; right: 0; background-color: @grey; color: @background; z-index: 0; min-height: 75vh; padding: 50px 0; font-family: @font2;
+
+  @media @mobile{position: relative; opacity: 1 !important; height: auto; height: auto; display: block; top: 0px; overflow: hidden;}
+
+  img{max-width: 150px;}
+  &.is-visible{opacity: 1}
+
+  .row{
+    display: flex;
+    @media @mobile{display: block;}
+  }
+
+  .row [class^="col"]{
+    @media @mobile{
+      margin-bottom: 30px;
+      &:last-child{margin-bottom: 0;}
+    }
+  }
+
+  strong{font-size: 14px; color: @black; font-weight: 300; letter-spacing: 2px; text-transform: uppercase; font-family: @font; border-bottom: 1px solid @black; margin-bottom: 5px; display: block; padding-bottom: 5px;}
+
+
+
+}
 
 // + ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
 // | ANIMATIONS & FX

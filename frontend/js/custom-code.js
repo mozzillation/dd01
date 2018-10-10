@@ -1,5 +1,7 @@
-var header = $('.header');
-
+var header = $('.header'),
+  page = $('#page'),
+  grain = $('.grain'),
+  footer = $('.footer');
 
 
 
@@ -29,6 +31,12 @@ $(window).load(function() {
     var opacityValue = map(scroll, 0, wHeight / 1.5, 0, 1);
     var positionValue = map(scroll, 0, wHeight / 1.5, 0, -100);
 
+    if (scroll > wHeight) {
+      footer.addClass('is-visible')
+    } else {
+      footer.removeClass('is-visible')
+    }
+
     $('.overlay').css({
       opacity: opacityValue
     })
@@ -47,8 +55,7 @@ $(window).load(function() {
 
 function animate() {
 
-  var page = $('#page'),
-    grain = $('.grain');
+
 
   grain.addClass('is-loaded');
   page.addClass('is-loaded');
@@ -56,7 +63,7 @@ function animate() {
   var i = 0,
     arrayAnimation = $('[data-animate]').toArray();
 
-  console.log(arrayAnimation);
+  // console.log(arrayAnimation);
 
   arrayAnimation.forEach(function(t) {
     var delay = i * 100;
@@ -77,7 +84,7 @@ function animate() {
   inView.threshold(1);
   inView('[data-scroll]')
     .on('enter', el => {
-      console.log(el);
+      // console.log(el);
       el.style.opacity = 1;
       el.classList.add('is-animated')
     })
