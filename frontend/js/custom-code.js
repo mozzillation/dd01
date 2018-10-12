@@ -12,9 +12,18 @@ $(window).load(function() {
     scrollTop: 0
   }, 10);
 
+  verbalGraph();
+
   setTimeout(function() {
     animate();
   }, 1000)
+
+
+
+
+  // INFOGRAPHIC INTERACTION
+
+
 
   var wHeight = $(window).height();
 
@@ -51,6 +60,46 @@ $(window).load(function() {
 })
 
 
+function verbalGraph() {
+  var offset = $("#verbal").offset();
+
+  $(window).resize(function() {
+    offset = $("#verbal").offset();
+  })
+
+
+  console.log(offset);
+
+  $("#verbal").mousemove(function(e) {
+    var leftV = e.pageX - offset.left + 10;
+    var topV = e.pageY - offset.top - 10;
+    $('.verbal_box').css({
+      left: leftV,
+      top: topV
+    })
+  });
+
+  $('#verbal g path').hover(function() {
+    var $this = $(this).parent('g');
+    var country = $this.data('title'),
+      verbal = $this.data('v'),
+      noverbal = $this.data('nv');
+
+    $('.verbal_box').addClass('is-visible');
+
+    $('.verbal_box__title').html(country);
+    $('.verbal_box__verbal span.perc').html(verbal + "%");
+    $('.verbal_box__noverbal span.perc').html(noverbal + "%");
+
+    $(this).parent('g').addClass('active');
+    $('#verbal g').not(this).addClass('hide');
+  }, function() {
+    $('.verbal_box').removeClass('is-visible');
+    $(this).parent('g').removeClass('active');
+    $('#verbal g').not(this).removeClass('hide');
+  });
+}
+
 
 
 function animate() {
@@ -81,16 +130,14 @@ function animate() {
     bottom: 50,
     left: 0
   });
-  inView.threshold(1);
-  inView('[data-scroll]')
+  inView.threshold(0.5);
+  inView('[data-scroll], section')
     .on('enter', el => {
-      // console.log(el);
+      console.log(el);
       el.style.opacity = 1;
       el.classList.add('is-animated')
     })
-    .on('exit', el => {
-      // el.style.opacity = 0.1;
-    });
+    .on('exit', el => {});
 
 };
 

@@ -21,6 +21,7 @@
 @white:	      #FFFFFF;
 @black:		    #000000;
 @grey:		    #999999;
+@grey-dark:		darken(#999999, 30);
 @grey-light:  #EEEEEE;
 @purple:      #9D77FC;
 
@@ -105,7 +106,7 @@ img{display: block; width: 100%;}
 
 
 #page-scroll{
-  position: absolute; top: 100vh; z-index: 1000; box-shadow: 0px 0px 100px @black; width: 100vw; background-color: @background; margin-bottom: 75vh; overflow: hidden;
+  position: absolute; top: 100vh; z-index: 1000; box-shadow: 0px 0px 100px @black; width: 100%; background-color: @background; margin-bottom: 75vh; overflow: hidden; min-height: 100vh;
 
   @media @mobile{position: relative; margin-bottom: auto; top: auto; margin-top: 100vh;}
 }
@@ -142,6 +143,63 @@ img{display: block; width: 100%;}
 
 }
 
+
+.verbal{overflow: hidden;
+
+  .row{display: flex; overflow: hidden;}
+
+  h1{
+    font-size: 1.75rem; line-height: 2.5rem; font-family: @font; text-transform: uppercase; margin-bottom: 30px; color: @primary;
+  }
+
+  &_index{
+    font-size: 12px; font-family: @font2; line-height: 22px;
+
+  }
+
+  &_meaning, &_source{font-size: 9px; font-family: @font; text-transform: uppercase; line-height: 14px; color: @grey-dark; margin-bottom: 15px;
+    a{border-bottom: 1px solid @grey-dark; transition: border @animation;
+      &:hover{color: @primary; border-color: @primary;}
+    }
+  }
+
+
+  padding-bottom: 90px; position: relative;
+  color: @grey;
+
+  ol{ padding: 12px 0;
+    list-style: decimal-leading-zero;
+  }
+
+  &_legend{color: @white; display: flex; align-items: baseline; align-content: space-between; justify-content: space-between; padding-bottom: 15px; font-size: 14px; line-height: 20px;
+    .right{text-align: right;}
+  }
+
+  &_info{position: relative;}
+
+  &_box{position: absolute; padding: 0px 0px 0px 0; color: @white; min-width: 120px; opacity: 0; transition: opacity @animation;
+    &.is-visible{opacity: 1}
+    &__title{text-transform: capitalize; border-bottom: 1px solid @white; margin-bottom: 5px;}
+    &__verbal, &__noverbal{font-size: 12px; text-transform: uppercase; line-height: 16px; color: @grey; display: flex; align-items: center; justify-content: space-between;
+      span:last-child{color: @primary;}
+    }
+  }
+
+
+  #verbal{
+    .cls-1,.cls-6{fill:#111; }.cls-1{stroke:#111;}.cls-1,.cls-2{stroke-width:2px;}.cls-2,.cls-7{stroke:#fff;}.cls-3{fill:#fff;}.cls-4,.cls-7{fill:none;stroke-width:10px;}.cls-4{stroke: #9d77fc; opacity: 0.1; transition: opacity @animation;} .cls-5{fill:#9d77fc; stroke: @background;}.cls-7{stroke-dasharray:20 10; stroke-width:3px;}
+
+    .hide{
+      // .cls-5{fill: @grey;}
+      .cls-4{opacity: 0.02}
+    }
+    .active{
+      .cls-4{opacity: 1!important; stroke: @primary !important;}
+    }
+  }
+}
+
+
 // + ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
 // | FOOTER
 // + ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
@@ -176,16 +234,20 @@ img{display: block; width: 100%;}
 // + ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
 
 .animation(){
-  transition: transform @animation, filter @animation 0.1s, opacity @animation; opacity: 0; transform: translateY(10px); filter: grayscale();
+  transition: transform @animation, filter @animation 0.4s, opacity @animation; opacity: 0; transform: translateY(10px); filter: grayscale();
   &.is-animated{
     transform: translateY(0px); filter: none; opacity: 1;
   }
 }
 
-.grain{
-    display: block; position: fixed; top: -50%; left: -60%; right: -60%; bottom: -60%; z-index: 99999999; pointer-events: none; background: transparent url(../img/noise.png) repeat 0 0; visibility: visible; animation: grain .5s infinite; opacity: 0; transition: opacity 1s @ease;
-    &.is-loaded{opacity: .7; }
+*[data-scroll]{
+  .animation();
 }
+
+// .grain{
+//     display: block; position: fixed; top: -50%; left: -60%; right: -60%; bottom: -60%; z-index: 99999999; pointer-events: none; background: transparent url(../img/noise.png) repeat 0 0; visibility: visible; animation: grain .5s infinite; opacity: 0; transition: opacity 1s @ease;
+//     &.is-loaded{opacity: .7; }
+// }
 
 .overlay{
   width: 100vw;
