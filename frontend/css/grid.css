@@ -3,7 +3,7 @@
 
 .row [class^="col"] {
   margin: 0 2%;
-  min-height: 0.125rem;
+  min-height: 0.001rem;
 }
 
 .col-1,

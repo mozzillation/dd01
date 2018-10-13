@@ -26,6 +26,7 @@ $(window).load(function() {
 
 
   var wHeight = $(window).height();
+  var overflow = $('.overflow');
 
   $(window).scroll(function() {
 
@@ -41,9 +42,12 @@ $(window).load(function() {
     var positionValue = map(scroll, 0, wHeight / 1.5, 0, -100);
 
     if (scroll > wHeight) {
-      footer.addClass('is-visible')
+      footer.addClass('is-visible');
+      overflow.addClass('is-visible');
+
     } else {
       footer.removeClass('is-visible')
+      overflow.removeClass('is-visible');
     }
 
     $('.overlay').css({
@@ -80,19 +84,24 @@ function verbalGraph() {
   });
 
   $('#verbal g path').hover(function() {
-    var $this = $(this).parent('g');
-    var country = $this.data('title'),
-      verbal = $this.data('v'),
-      noverbal = $this.data('nv');
+    var parent = $(this).parent('g').attr('id');
 
-    $('.verbal_box').addClass('is-visible');
+    if (parent != 'BG') {
+      var $this = $(this).parent('g');
+      var country = $this.data('title'),
+        verbal = $this.data('v'),
+        noverbal = $this.data('nv');
 
-    $('.verbal_box__title').html(country);
-    $('.verbal_box__verbal span.perc').html(verbal + "%");
-    $('.verbal_box__noverbal span.perc').html(noverbal + "%");
+      $('.verbal_box').addClass('is-visible');
 
-    $(this).parent('g').addClass('active');
-    $('#verbal g').not(this).addClass('hide');
+      $('.verbal_box__title').html(country);
+      $('.verbal_box__verbal span.perc').html(verbal + "%");
+      $('.verbal_box__noverbal span.perc').html(noverbal + "%");
+
+      $(this).parent('g').addClass('active');
+      $('#verbal g').not(this).addClass('hide');
+
+    };
   }, function() {
     $('.verbal_box').removeClass('is-visible');
     $(this).parent('g').removeClass('active');
