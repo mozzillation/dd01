@@ -1,5 +1,7 @@
 var header = $('.header'),
   page = $('#page'),
+  pageScroll = $('#page-scroll'),
+  menu = $('#menu'),
   grain = $('.grain'),
   footer = $('.footer');
 
@@ -12,6 +14,7 @@ $(window).load(function() {
     scrollTop: 0
   }, 10);
 
+  alluvionalGraph();
   verbalGraph();
 
   setTimeout(function() {
@@ -44,10 +47,12 @@ $(window).load(function() {
     if (scroll > wHeight) {
       footer.addClass('is-visible');
       overflow.addClass('is-visible');
+      menu.addClass('is-visible');
 
     } else {
       footer.removeClass('is-visible')
       overflow.removeClass('is-visible');
+      menu.removeClass('is-visible');
     }
 
     $('.overlay').css({
@@ -63,6 +68,23 @@ $(window).load(function() {
 
 })
 
+// ———————————————————————————
+//  ALLUVIONAL GRAPH
+// ———————————————————————————
+
+function alluvionalGraph() {
+  $(".alluvional g[id*='ALL']").hover(function() {
+    var ID = $(this).val('id');
+    $(".alluvional g[id*='ALL']").not(ID).addClass('hide');
+  }, function() {
+    $(".alluvional g").removeClass('hide');
+  });
+}
+
+
+// ———————————————————————————
+//  VERBAL - NON VERBAL GRAPH
+// ———————————————————————————
 
 function verbalGraph() {
   var offset = $("#verbal").offset();
@@ -139,7 +161,7 @@ function animate() {
     bottom: 50,
     left: 0
   });
-  inView.threshold(0.5);
+  inView.threshold(0.3);
   inView('[data-scroll], section')
     .on('enter', el => {
       console.log(el);
