@@ -73,12 +73,20 @@ $(window).load(function() {
 // ———————————————————————————
 
 function alluvionalGraph() {
-  $(".alluvional g[id*='ALL']").hover(function() {
+  $(".alluvional g[id*='ALL']").hoverIntent(function() {
     var ID = $(this).val('id');
     $(".alluvional g[id*='ALL']").not(ID).addClass('hide');
   }, function() {
     $(".alluvional g").removeClass('hide');
   });
+
+  $(".alluvional g[id*='BAR']").hoverIntent(function() {
+    var ID = $(this).val('id');
+    $(".alluvional g[id*='BAR']").not(ID).addClass('hide');
+  }, function() {
+    $(".alluvional g").removeClass('hide');
+  });
+
 }
 
 
@@ -105,7 +113,7 @@ function verbalGraph() {
     })
   });
 
-  $('#verbal g path').hover(function() {
+  $('#verbal g path').hoverIntent(function() {
     var parent = $(this).parent('g').attr('id');
 
     if (parent != 'BG') {
