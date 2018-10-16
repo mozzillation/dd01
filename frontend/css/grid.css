@@ -18,7 +18,7 @@
 .col-10,
 .col-11,
 .col-12 {
-  width: 96%;
+  width: 96%; position: relative;
 }
 
 .col-1-sm {
