@@ -133,14 +133,19 @@ img{display: block; width: 100%;}
 // + ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
 // | CHAPTER
 // + ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
-.chapter{padding: 100px 0;  margin: 50px auto; position: relative; background: @primary;
-  .row{ box-shadow: 0px 25px 100px -50px @primary;
-    .col-6{
-       padding: 50px 0;
+.chapter{padding: 100px 0;  margin: 50px auto; position: relative;  text-align: center; color: @white;
+  .row{
+    .col-12{  border-bottom: 1px solid @grey-dark; border-top: 1px solid @white; padding: 50px 0;
     }
-    h1{  font-size: 2rem; line-height: 2.5rem; font-weight: 500; color: @white;
-      .number{color: fade(@black, 20); font-family: @font2;}
+    h1{  font-size: 5rem; line-height: 6rem; font-weight: 500; color: @white; text-transform: uppercase;
+      @media @mobile{font-size: 3rem; line-height: 3.5rem;}
     }
+        .number{color: @primary;  padding: 0px 0 5px}
+
+    p{  font-size: 12px; font-family: @font2; line-height: 22px; color: @grey; margin-bottom: 25px;
+      &:last-child{margin-bottom: 0;}
+    }
+
 
   }
 
@@ -208,6 +213,11 @@ img{display: block; width: 100%;}
 
   g{overflow: hidden; transition: opacity @animation;
     path, g, rect{}
+
+  &.bright{
+    .cls-10,.cls-11,.cls-12,.cls-13,.cls-14,.cls-15,.cls-16,.cls-17,.cls-18,.cls-19,.cls-20,.cls-21,.cls-22,.cls-23,.cls-24,.cls-25,.cls-26,.cls-27,.cls-28,.cls-29,.cls-30,.cls-31,.cls-32,.cls-33,.cls-34,.cls-35,.cls-36,.cls-37,.cls-38,.cls-39,.cls-40{stroke-opacity: 0.6;}
+  }
+
     &.hide{
       path, g, rect{opacity: 0.2;}
     }
@@ -279,7 +289,9 @@ img{display: block; width: 100%;}
     .right{text-align: right;}
   }
 
-  &_info{position: relative;}
+  &_info{position: relative;
+    @media @mobile{padding-top: 50px;}
+  }
 
   &_box{position: absolute; padding: 0px 0px 0px 0; color: @white; min-width: 120px; opacity: 0; transition: opacity @animation;
     &.is-visible{opacity: 1}
@@ -309,9 +321,16 @@ img{display: block; width: 100%;}
   .row{
     display: flex; align-items: center; align-content: center;
 
+    &.reverse{
+      @media @mobile{flex-direction: column-reverse;}
+    }
+
     svg{transition: transform @animation; transform: rotate(45deg)}
 
-    img{height: 100px; width: auto; margin-top: 50px; float: right;}
+    img{height: 100px; width: auto; margin-top: 50px; float: right;
+
+      @media @mobile{float: none; margin: 50px auto;}
+    }
 
   }
   .country{
@@ -322,7 +341,7 @@ img{display: block; width: 100%;}
   }
 
   .st0 {
-    fill: #111111;
+    fill: transparent;
   }
 
   .st1 {
@@ -363,6 +382,10 @@ img{display: block; width: 100%;}
 .footer{ align-items: flex-end; display: flex;
   opacity: 0; z-index: 0; position: fixed; top: 25vh; left: 0; right: 0; background-color: @grey; color: @background; z-index: 0; min-height: 75vh; padding: 50px 0; font-family: @font2;
 
+  a{border-bottom: 1px solid @black; transition: opacity @animation;
+    &:hover{border-color: @black; color: @black; opacity: 0.6;}
+  }
+
   @media @mobile{position: relative; opacity: 1 !important; height: auto; height: auto; display: block; top: 0px; overflow: hidden;}
 
   img{max-width: 150px;}
@@ -400,11 +423,11 @@ img{display: block; width: 100%;}
 *[data-scroll]{
   .animation();
 }
-//
-// .grain{
-//     display: block; position: fixed; top: -50%; left: -60%; right: -60%; bottom: -60%; z-index: 99999999; pointer-events: none; background: transparent url(../img/noise.png) repeat 0 0; visibility: visible; animation: grain .5s infinite; opacity: 0; transition: opacity 1s @ease;
-//     &.is-loaded{opacity: .7; }
-// }
+
+.grain{
+    display: block; position: fixed; top: -50%; left: -60%; right: -60%; bottom: -60%; z-index: 99999999; pointer-events: none; background: transparent url(../img/noise.png) repeat 0 0; visibility: visible; animation: grain .5s infinite; opacity: 0; transition: opacity 1s @ease;
+    &.is-loaded{opacity: .7; }
+}
 
 
 .overflow{

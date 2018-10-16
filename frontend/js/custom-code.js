@@ -102,6 +102,7 @@ function alluvionalGraph() {
 
     var ID = $(this).val('id');
     $(".alluvional g[id*='ALL']").not(ID).addClass('hide');
+    $(this).addClass('bright');
 
     var physical = $(this).data('physical');
     var intrusive = $(this).data('intrusive');
@@ -126,7 +127,7 @@ function alluvionalGraph() {
 
 
   }, function() {
-    $(".alluvional g").removeClass('hide');
+    $(".alluvional g").removeClass('hide bright');
     $('.alluvional .box').removeClass('is-visible');
   });
 
