@@ -17,6 +17,7 @@ $(window).load(function() {
   alluvionalGraph();
   verbalGraph();
   perpetratorGraph();
+  scrollTo();
 
   setTimeout(function() {
     animate();
@@ -269,4 +270,17 @@ function animate() {
 
 function map(num, in_min, in_max, out_min, out_max) {
   return (num - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+}
+
+
+
+function scrollTo() {
+  $('.definition_button').click(function() {
+    $('.paper, .paper__overlay').addClass('is-visible');
+  })
+
+  $('.paper__overlay').click(function() {
+    $('.paper, .paper__overlay').removeClass('is-visible');
+  });
+
 }
