@@ -17,6 +17,7 @@ $(window).load(function() {
   alluvionalGraph();
   verbalGraph();
   perpetratorGraph();
+  radarGraph();
   scrollTo();
 
   setTimeout(function() {
@@ -98,6 +99,9 @@ function alluvionalGraph() {
 
 
   $(".alluvional g[id*='ALL']").hoverIntent(function() {
+
+    $('#alluvional').removeClass('off');
+    $('*').removeClass('blink');
 
     $('.box').addClass('is-visible');
 
@@ -207,6 +211,44 @@ function verbalGraph() {
 }
 
 
+function radarGraph() {
+
+  var offset = $("#short").offset();
+
+  $(window).resize(function() {
+    offset = $("#short").offset();
+  })
+
+
+  console.log(offset);
+
+  $("#short").mousemove(function(e) {
+    var leftV = e.pageX - offset.left + 10;
+    var topV = e.pageY - offset.top - 10;
+    $('.radar .box').css({
+      left: leftV,
+      top: topV
+    })
+  });
+
+
+  $('#short g[id^=VIOL]').hoverIntent(function() {
+    var parent = $(this).data('perc');
+    $('.radar .box div').html(parent + "%")
+    $('.radar .box').addClass('is-visible');
+
+
+    console.log(parent)
+    var $this = $(this);
+    $this.addClass('bright');
+    $('#short g[id^=VIOL]').not($this).addClass('hide');
+
+  }, function() {
+    $('.radar .box').removeClass('is-visible');
+    $('#short g').removeClass('hide bright');
+  })
+};
+
 
 function perpetratorGraph() {
   $('.perpetrator g').hoverIntent(function() {
@@ -277,10 +319,12 @@ function map(num, in_min, in_max, out_min, out_max) {
 function scrollTo() {
   $('.definition_button').click(function() {
     $('.paper, .paper__overlay').addClass('is-visible');
+    $('body').addClass('overflow2');
   })
 
   $('.paper__overlay').click(function() {
     $('.paper, .paper__overlay').removeClass('is-visible');
+    $('body').removeClass('overflow2');
   });
 
 }
