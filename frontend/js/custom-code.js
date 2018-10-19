@@ -18,6 +18,7 @@ $(window).load(function() {
   verbalGraph();
   perpetratorGraph();
   radarGraph();
+  radar2Graph();
   scrollTo();
 
   setTimeout(function() {
@@ -211,6 +212,45 @@ function verbalGraph() {
 }
 
 
+function radar2Graph() {
+
+  var offset = $("#long").offset();
+
+  $(window).resize(function() {
+    offset = $("#long").offset();
+  })
+
+
+  console.log(offset);
+
+  $("#long").mousemove(function(e) {
+    var leftV = e.pageX - offset.left + 10;
+    var topV = e.pageY - offset.top - 10;
+    $('.long .box').css({
+      left: leftV,
+      top: topV
+    })
+  });
+
+
+  $('#long g[id^=VIOL]').hoverIntent(function() {
+    var parent = $(this).data('perc');
+    $('.long .box div').html(parent + "%")
+    $('.long .box').addClass('is-visible');
+
+
+    console.log(parent)
+    var $this = $(this);
+    $this.addClass('bright');
+    $('#long g[id^=VIOL]').not($this).addClass('hide');
+
+  }, function() {
+    $('.long .box').removeClass('is-visible');
+    $('#long g').removeClass('hide bright');
+  })
+};
+
+
 function radarGraph() {
 
   var offset = $("#short").offset();
@@ -248,7 +288,6 @@ function radarGraph() {
     $('#short g').removeClass('hide bright');
   })
 };
-
 
 function perpetratorGraph() {
   $('.perpetrator g').hoverIntent(function() {
