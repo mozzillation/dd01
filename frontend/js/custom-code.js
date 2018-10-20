@@ -21,6 +21,7 @@ $(window).load(function() {
   perpetratorGraph();
   radarGraph();
   radar2Graph();
+  policiesGraph();
   scrollTo();
 
   setTimeout(function() {
@@ -87,13 +88,12 @@ function alluvionalGraph() {
   })
 
 
-  // console.log(offset);
 
   $("#alluvional").mousemove(function(e) {
     var leftV = e.pageX - offset.left + 30;
     var topV = e.pageY - offset.top - 10;
 
-    console.log(leftV);
+    // console.log(leftV);
     $('.alluvional .box, .alluvional .box2').css({
       left: leftV,
       top: topV
@@ -176,7 +176,7 @@ function verbalGraph() {
   })
 
 
-  console.log(offset);
+  // console.log(offset);
 
   $("#verbal").mousemove(function(e) {
     var leftV = e.pageX - offset.left + 10;
@@ -223,7 +223,7 @@ function radar2Graph() {
   })
 
 
-  console.log(offset);
+  // console.log(offset);
 
   $("#long").mousemove(function(e) {
     var leftV = e.pageX - offset.left + 10;
@@ -241,7 +241,7 @@ function radar2Graph() {
     $('.long .box').addClass('is-visible');
 
 
-    console.log(parent)
+    // console.log(parent)
     var $this = $(this);
     $this.addClass('bright');
     $('#long g[id^=VIOL]').not($this).addClass('hide');
@@ -262,7 +262,7 @@ function radarGraph() {
   })
 
 
-  console.log(offset);
+  // console.log(offset);
 
   $("#short").mousemove(function(e) {
     var leftV = e.pageX - offset.left + 10;
@@ -280,7 +280,7 @@ function radarGraph() {
     $('.radar .box').addClass('is-visible');
 
 
-    console.log(parent)
+    // console.log(parent)
     var $this = $(this);
     $this.addClass('bright');
     $('#short g[id^=VIOL]').not($this).addClass('hide');
@@ -308,6 +308,50 @@ function perpetratorGraph() {
     })
   })
 
+}
+
+
+function policiesGraph() {
+  var offset = $("#policies").offset();
+
+  $(window).resize(function() {
+    offset = $("#policies").offset();
+  })
+
+
+  // console.log(offset);
+
+  $("#policies").mousemove(function(e) {
+    var leftV = e.pageX - offset.left + 10;
+    var topV = e.pageY - offset.top - 10;
+    $('.policies .box').css({
+      left: leftV,
+      top: topV
+    })
+  });
+
+  $('#policies g ').hoverIntent(function() {
+    var perc = $(this).data('perc');
+
+    if (perc !== undefined) {
+      var ID = $(this).attr('id');
+
+      $('.policies .box').addClass('is-visible');
+
+      if (ID.indexOf("active_user") >= 0) {
+
+        $('.policies .box div').html(perc + " active users")
+      } else if (ID.indexOf("Sample") >= 0) {
+        $('.policies .box div').html("Sample 3000 women")
+      } else if (ID.indexOf("harassments") >= 0) {
+        $('.policies .box div').html(perc + " cases of harassment")
+      } else {
+        $('.policies .box div').html(perc + "%")
+      }
+    }
+  }, function() {
+    $('.policies .box').removeClass('is-visible');
+  });
 }
 
 
@@ -342,7 +386,7 @@ function animate() {
   inView.threshold(0.3);
   inView('[data-scroll], section')
     .on('enter', el => {
-      console.log(el);
+      // console.log(el);
       el.style.opacity = 1;
       el.classList.add('is-animated')
     })
