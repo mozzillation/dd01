@@ -16,12 +16,14 @@ $(window).load(function() {
     scrollTop: 0
   }, 10);
 
+  mapGraph();
   alluvionalGraph();
   verbalGraph();
   perpetratorGraph();
   radarGraph();
   radar2Graph();
   policiesGraph();
+  perpetrator2Graph();
   scrollTo();
 
   setTimeout(function() {
@@ -75,6 +77,43 @@ $(window).load(function() {
 
 })
 
+
+function perpetrator2Graph() {
+
+  $("#perpetrator2 g[id*='country']").hoverIntent(function() {
+    var ID = $(this).val('id');
+    $("#perpetrator2 g[id*='country']").not(ID).addClass('hide');
+    $(this).find("g[id*='numeri']").addClass('is-visible');
+
+  }, function() {
+    $("#perpetrator2 g, #perpetrator2 g[id*='country']").removeClass('hide is-visible');
+  });
+
+}
+
+
+function mapGraph() {
+
+  $(".map g[id*='stato']").hoverIntent(function() {
+
+    $('#map').removeClass('off');
+    $(".map g").removeClass('animated');
+
+    var ID = $(this).val('id');
+    var name = $(this).data('name');
+    var perc = $(this).data('perc');
+    $(".map g[id*='stato']").not(ID).addClass('hide');
+    $('.map .info .country').html(name);
+    $('.map .info').addClass('is-visible')
+    $('.map .info .perc').html(perc + '%');
+  }, function() {
+    $(".map g, .map .info").removeClass('hide is-visible');
+  })
+
+};
+
+
+
 // ———————————————————————————
 //  ALLUVIONAL GRAPH
 // ———————————————————————————
@@ -106,7 +145,7 @@ function alluvionalGraph() {
     $('#alluvional').removeClass('off');
     $('*').removeClass('blink');
 
-    $('.box').addClass('is-visible');
+    $('.alluvional .box').addClass('is-visible');
 
     var ID = $(this).val('id');
     $(".alluvional g[id*='ALL']").not(ID).addClass('hide');
@@ -140,22 +179,27 @@ function alluvionalGraph() {
   });
 
   $(".alluvional g[id*='BAR']").hoverIntent(function() {
-    $('.box2').addClass('is-visible');
+    // $('.box2').addClass('is-visible');
+    $(this).find("g[id*='numbers']").each(function() {
+      $(this).addClass('is-visible');
+    })
+
 
     var ID = $(this).val('id');
     $(".alluvional g[id*='BAR']").not(ID).addClass('hide');
 
-    var once = $(this).data('once');
-    var two = $(this).data('two');
-    var six = $(this).data('six');
-
-    $('.box__once span.perc').html(once + "%");
-    $('.box__two span.perc').html(two + "%");
-    $('.box__six span.perc').html(six + "%");
+    // var once = $(this).data('once');
+    // var two = $(this).data('two');
+    // var six = $(this).data('six');
+    //
+    // $('.box__once span.perc').html(once + "%");
+    // $('.box__two span.perc').html(two + "%");
+    // $('.box__six span.perc').html(six + "%");
 
   }, function() {
-    $(".alluvional g").removeClass('hide');
-    $('.alluvional .box2').removeClass('is-visible');
+    $(".alluvional g").removeClass('hide is-visible');
+
+    // $('.alluvional .box2').removeClass('is-visible');
   });
 
 
@@ -309,6 +353,13 @@ function perpetratorGraph() {
   })
 
 }
+
+
+function policiesGraph() {
+
+
+
+};
 
 
 function policiesGraph() {
