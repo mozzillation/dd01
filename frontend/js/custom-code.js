@@ -25,6 +25,7 @@ $(window).load(function() {
   policiesGraph();
   perpetrator2Graph();
   scrollTo();
+  psyGraph();
 
   setTimeout(function() {
     animate();
@@ -369,13 +370,6 @@ function perpetratorGraph() {
 
 
 function policiesGraph() {
-
-
-
-};
-
-
-function policiesGraph() {
   var offset = $("#policies").offset();
 
   $(window).resize(function() {
@@ -418,6 +412,60 @@ function policiesGraph() {
   });
 }
 
+function psyGraph() {
+
+  var offset = $("#psychological").offset();
+
+  $(window).resize(function() {
+    offset = $("#psychological").offset();
+  })
+
+
+  // console.log(offset);
+
+  $("#psychological").mousemove(function(e) {
+    var leftV = e.pageX - offset.left + 10;
+    var topV = e.pageY - offset.top - 10;
+    $('.psychological .box').css({
+      left: leftV,
+      top: topV
+    })
+  });
+
+
+  $('#psychological g[id^="country"]').hoverIntent(function() {
+    var $this = $(this);
+    $this.addClass('bright');
+    $('.psychological .box').addClass('is-visible');
+    $('#psychological').removeClass('animation');
+    $('#psychological g[id^="country"]').not($this).addClass('hide');
+
+    var threats = $(this).data('threats');
+    var mysoginist = $(this).data('mysoginist');
+    var racist = $(this).data('racist');
+    var homophobic = $(this).data('homophobic');
+    var generic = $(this).data('generic');
+    var intimate = $(this).data('intimate');
+    var details = $(this).data('details');
+    var others = $(this).data('others');
+
+    $('.psychological .box__threats span.perc').html(threats + "%");
+    $('.psychological .box__mysoginist span.perc').html(mysoginist + "%");
+    $('.psychological .box__racist span.perc').html(racist + "%");
+    $('.psychological .box__homophobic span.perc').html(homophobic + "%");
+    $('.psychological .box__generic span.perc').html(generic + "%");
+    $('.psychological .box__intimate span.perc').html(intimate + "%");
+    $('.psychological .box__details span.perc').html(details + "%");
+    $('.psychological .box__others span.perc').html(others + "%");
+
+  }, function() {
+    $('#psychological g').removeClass('hide bright');
+    $('.psychological .box').removeClass('is-visible');
+
+  });
+
+
+}
 
 function animate() {
 
@@ -462,6 +510,9 @@ function animate() {
 function map(num, in_min, in_max, out_min, out_max) {
   return (num - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
+
+
+
 
 
 
