@@ -81,6 +81,9 @@ $(window).load(function() {
 function perpetrator2Graph() {
 
   $("#perpetrator2 g[id*='country']").hoverIntent(function() {
+
+    $('#perpetrator2').removeClass('animation');
+
     var ID = $(this).val('id');
     $("#perpetrator2 g[id*='country']").not(ID).addClass('hide');
     $(this).find("g[id*='numeri']").addClass('is-visible');
@@ -98,6 +101,7 @@ function mapGraph() {
 
     $('#map').removeClass('off');
     $(".map g").removeClass('animated');
+    $(".map .legend").addClass('is-visible');
 
     var ID = $(this).val('id');
     var name = $(this).data('name');
@@ -232,6 +236,9 @@ function verbalGraph() {
   });
 
   $('#verbal g path').hoverIntent(function() {
+
+    $('#verbal g').removeClass('animation');
+
     var parent = $(this).parent('g').attr('id');
 
     if (parent != 'BG') {
@@ -280,6 +287,9 @@ function radar2Graph() {
 
 
   $('#long g[id^=VIOL]').hoverIntent(function() {
+
+    $('#long g').removeClass('animation');
+
     var parent = $(this).data('perc');
     $('.long .box div').html(parent + "%")
     $('.long .box').addClass('is-visible');
@@ -319,6 +329,9 @@ function radarGraph() {
 
 
   $('#short g[id^=VIOL]').hoverIntent(function() {
+
+    $('#short g').removeClass('animation');
+
     var parent = $(this).data('perc');
     $('.radar .box div').html(parent + "%")
     $('.radar .box').addClass('is-visible');
