@@ -26,6 +26,7 @@ $(window).load(function() {
   perpetrator2Graph();
   scrollTo();
   psyGraph();
+  consequencesGraph();
 
   setTimeout(function() {
     animate();
@@ -367,6 +368,50 @@ function perpetratorGraph() {
   })
 
 }
+
+
+function consequencesGraph() {
+
+  var offset = $("#consequences").offset();
+
+  $(window).resize(function() {
+    offset = $("#consequences").offset();
+  })
+
+
+  // console.log(offset);
+
+  $("#consequences").mousemove(function(e) {
+    var leftV = e.pageX - offset.left + 10;
+    var topV = e.pageY - offset.top - 10;
+    $('.consequences .box').css({
+      left: leftV,
+      top: topV
+    })
+  });
+
+
+  $('#consequences g[id^=VIOL]').hoverIntent(function() {
+
+    $('#consequences').removeClass('animation');
+
+    var parent = $(this).data('perc');
+
+    $('.consequences .box div').html(parent + "%")
+    $('.consequences .box').addClass('is-visible');
+
+
+    // console.log(parent)
+    var $this = $(this);
+    $this.addClass('bright');
+    $('#consequences g[id^=VIOL]').not($this).addClass('hide');
+
+  }, function() {
+    $('.consequences .box').removeClass('is-visible');
+    $('#consequences g').removeClass('hide bright');
+  })
+};
+
 
 
 function policiesGraph() {

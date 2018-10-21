@@ -938,12 +938,93 @@ img{display: block; width: 100%;}
 
 }
 
-.conclusion{padding: 100px 0 100px;
+
+
+
+
+.consequences{
+
+  .box{position: absolute; padding: 0px 0px 0px 0; color: @white; width: auto; opacity: 0; transition: opacity @animation; background-color: fade(@black, 50); padding: 15px;
+    &.is-visible{opacity: 1}
+    div{font-size: 10px; text-transform: uppercase; line-height: 16px; color: @grey; display: flex; align-items: center; justify-content: space-between;
+      span:last-child{color: @white;}
+    }
+  }
+
+  .hide{opacity: 0.2;}
+
+  g{
+    transition: opacity @animation;
+  }
+  .bright{
+    .st4{stroke: @primary !important;}
+      .st5{fill: @primary !important;}
+  }
+
+  #consequences{
+
+    &.animation{
+      animation: blink infinite alternate 1s;
+    }
+    .st0 {
+      fill: #111111;
+    }
+
+    .st1 {
+      fill: #FFFFFF;
+    }
+
+    .st2 {
+      fill: none;
+      stroke: #999999;
+      stroke-width: 0.5;
+      stroke-miterlimit: 10;
+    }
+
+    .st3 {
+      fill: none;
+      stroke: #999999;
+      stroke-width: 0.5;
+    }
+
+    .st4 {
+      fill: none;
+      stroke: #49396F;
+      stroke-width: 10;
+      stroke-linecap: round;
+      stroke-miterlimit: 10;
+    }
+
+    .st5 {
+      fill: #49396F;
+    }
+
+    .st6 {
+      fill: none;
+    }
+
+    .st7 {
+      fill: none;
+      stroke: #999999;
+      stroke-width: 0.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+  }
+}
+
+
+
+
+
+
+
+.conclusion{padding: 100px 0 100px; background-color: @primary;
   .row{
 
   }
   .col-10{ box-shadow: 0px 25px 50px -25px @primary;
-      background-color: @primary;
+
   }
 
   .col-8{
